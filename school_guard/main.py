@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from database import engine, Base
-import models
-
+from school_guard.database import engine
+from school_guard import models
+from school_guard.models import Base
 # Import routers
-from routers import users, cameras, incidents, alerts, feedback
+from routers import users, cameras, incidents, alerts, feedback, dashboard
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -30,7 +30,7 @@ app.include_router(cameras.router)
 app.include_router(incidents.router)
 app.include_router(alerts.router)
 app.include_router(feedback.router)
-
+app.include_router(dashboard.router)
 
 @app.get("/", tags=["Root"])
 def root():
