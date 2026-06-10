@@ -45,6 +45,21 @@ class Token(BaseModel):
 
 
 # ─────────────────────────────────────────
+# STUDENT
+# ─────────────────────────────────────────
+class StudentCreate(BaseModel):
+    name: str
+    grade: Optional[str] = None
+
+class StudentOut(BaseModel):
+    student_id: int
+    name: str
+    grade: Optional[str]
+    class Config:
+        from_attributes = True
+
+
+# ─────────────────────────────────────────
 # CAMERA
 # ─────────────────────────────────────────
 class CameraCreate(BaseModel):
@@ -68,6 +83,7 @@ class CameraOut(CameraCreate):
 # ─────────────────────────────────────────
 class IncidentCreate(BaseModel):
     camera_id: int
+    student_id: Optional[int] = None
     type: str
     severity: Optional[str] = "medium"
 
@@ -78,6 +94,7 @@ class IncidentUpdate(BaseModel):
 class IncidentOut(BaseModel):
     incident_id: int
     camera_id: int
+    student_id: Optional[int]
     type: str
     timestamp: datetime
     severity: str
@@ -126,3 +143,14 @@ class FeedbackOut(BaseModel):
     notes: Optional[str]
     class Config:
         from_attributes = True
+
+
+# ─────────────────────────────────────────
+# DASHBOARD
+# ─────────────────────────────────────────
+class DashboardStats(BaseModel):
+    total_students: int
+    total_incidents: int
+    total_cameras: int
+    total_alerts: int
+    pending_incidents: int
