@@ -1,9 +1,4 @@
-import sys
-import os
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from .database import Base
+from database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
