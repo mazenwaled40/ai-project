@@ -75,4 +75,4 @@ class Feedback(Base):
     feedback_time = Column(DateTime(timezone=True), server_default=func.now())
     notes         = Column(Text, nullable=True)
     user          = relationship("User", back_populates="feedbacks")
-    incident      = relationship("Incident", back_populates="feedbacks") hthoty da zy ma hwa
+    incident      = relationship("Incident", back_populates="feedbacks")
