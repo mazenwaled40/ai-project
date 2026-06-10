@@ -1,12 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from school_guard.database import engine
-from school_guard import models
-from school_guard.models import Base
-# Import routers
+from database import engine, Base
+import models
 from routers import users, cameras, incidents, alerts, feedback, dashboard
 
-# Create all tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -15,7 +12,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS - allow Flutter app & web dashboard
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,7 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register routers
 app.include_router(users.router)
 app.include_router(cameras.router)
 app.include_router(incidents.router)
