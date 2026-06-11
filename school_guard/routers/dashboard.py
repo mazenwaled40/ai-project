@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from school_guard.database import get_db
-from school_guard import models, schemas
-from school_guard.auth import get_current_user
-
+from database import get_db
+import models
+from auth import get_current_user
 router = APIRouter(tags=["Dashboard & Students Management"])
 
 @router.get("/dashboard/stats")
